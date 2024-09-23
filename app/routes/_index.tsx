@@ -7,7 +7,7 @@ export default function Index() {
   const [error, setError] = useState<string | null>(null);
 
 
-  const apiUrl = "https://devchuz-api-query.hf.space/search/";
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSearch = async () => {
     if (!query) {
