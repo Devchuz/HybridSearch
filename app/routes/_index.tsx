@@ -6,7 +6,7 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Obtener la URL de la API desde variables de entorno
+
   const apiUrl = "https://devchuz-api-query.hf.space/search/";
 
   const handleSearch = async () => {
@@ -16,7 +16,7 @@ export default function Index() {
     }
 
     setLoading(true);
-    setError(null); // Limpiar errores previos
+    setError(null); 
 
     try {
       const response = await fetch(apiUrl, {
@@ -25,7 +25,7 @@ export default function Index() {
           "Content-Type": "application/json",
           "accept": "application/json",
         },
-        body: JSON.stringify({ query_text: query }), // Enviar query_text correctamente
+        body: JSON.stringify({ query_text: query }), 
       });
 
       if (!response.ok) {
@@ -33,11 +33,11 @@ export default function Index() {
       }
 
       const data = await response.json();
-      console.log('Response from API:', data);  // Imprimir los datos obtenidos
+      console.log('Response from API:', data);  
 
       setResults(data.results || []);
     } catch (err: any) {
-      console.error('Fetch error:', err);  // Imprimir el error completo
+      console.error('Fetch error:', err);  
       setError(`An error occurred: ${err.message}`);
     } finally {
       setLoading(false);
