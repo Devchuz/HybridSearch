@@ -72,7 +72,7 @@ export default function Index() {
     <div className="flex justify-center items-center min-h-screen bg-gray-900 p-6">
       <div className="w-full max-w-7xl">
         <h1 className="text-3xl font-bold mb-6 text-white text-center">
-          Hybrid Search API
+          Search Product
         </h1>
 
         <div className="mb-6 text-center">
