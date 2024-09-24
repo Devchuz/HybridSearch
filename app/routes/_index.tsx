@@ -103,7 +103,7 @@ export default function Index() {
             Results:
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {results.length > 0 ? (
               results.map((result) => {
                 const [name, category, subcategory] = result.payload?.text
@@ -115,24 +115,34 @@ export default function Index() {
                 return (
                   <div
                     key={result.id}
-                    className="bg-gray-800 shadow-lg rounded-lg p-4 border border-gray-700 hover:shadow-xl transition duration-300 ease-in-out"
+                    className="bg-gray-800 shadow-md rounded-lg p-4 border border-gray-700 flex-col flex gap-4 hover:shadow-xl transition-transform transform hover:scale-105 duration-300 relative" // Better shadow, smooth hover effect
+                    style={{ minHeight: '370px' }} // Ensure enough space in the card
                   >
                     {/* Display the image from the API response or fallback if it fails */}
                     <img
                       src={imageUrl}
                       alt={name}
-                      className="w-full h-40 object-cover mb-4 rounded-t-lg"
+                      className="w-full h-40 object-cover mb-4 rounded-lg"
                       onError={(e) => {
-                        e.currentTarget.src = fallbackImage; // If the image fails to load, use the fallback image
+                        e.currentTarget.src = fallbackImage;
                       }}
                     />
-                    <p className="text-white font-bold mb-2">{name}</p>
-                    <p className="text-gray-400">{category}</p>
-                    <p className="text-gray-500 text-sm">{subcategory}</p>
-                    <div className="mt-4">
-                      <button className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-400">
-                        Add to Cart
-                      </button>
+                    {/* Ensure the product name is visible with enough space */}
+                    <p className="text-white font-bold mb-2 line-clamp-3 overflow-hidden h-full leading-tight">
+                      {name}
+                    </p>
+                    {/* Add to Cart Button fixed at the bottom left */}
+                    <div>
+                      <div className="absolute bottom-4 left-4"> 
+                        <button className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400 shadow-md">
+                          Add to Cart
+                        </button>
+                      </div>
+                      {/* Category and Subcategory fixed at the bottom right */}
+                      <div className="absolute bottom-4 right-4 text-right">
+                        <p className="text-gray-400">{category}</p>
+                        <p className="text-gray-500 text-sm">{subcategory}</p>
+                      </div>
                     </div>
                   </div>
                 );
